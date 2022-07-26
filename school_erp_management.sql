@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 09, 2022 at 10:32 AM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.6
+-- Generation Time: Jul 26, 2022 at 09:50 AM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 7.3.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -86,14 +86,6 @@ CREATE TABLE `classes` (
   `active` int(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='subjects in each class';
 
---
--- Dumping data for table `classes`
---
-
-INSERT INTO `classes` (`class_id`, `standard`, `subject_ids`, `description`, `total_amount`, `date_created`, `active`) VALUES
-(1, 'one', '[\"1\",\"2\",\"3\",\"4\"]', 'lorem ipsum dolor sit amet consectetur, adipisicing elit. hic, ratione voluptatibus! repellendus aliquam modi incidunt esse placeat deserunt dolorum quae!', 0, '2022-07-07 22:22:16', 1),
-(2, 'two', '[\"5\",\"6\",\"7\",\"8\"]', 'lorem ipsum dolor si', 0, '2022-07-07 22:22:31', 1);
-
 -- --------------------------------------------------------
 
 --
@@ -106,17 +98,6 @@ CREATE TABLE `fees` (
   `description` varchar(200) NOT NULL,
   `amount` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `fees`
---
-
-INSERT INTO `fees` (`id`, `course_id`, `description`, `amount`) VALUES
-(1, 1, 'Tuition', 3000),
-(3, 1, 'sample', 1500),
-(36, 4, 'tution', 2000),
-(37, 3, 'tution', 4000),
-(40, 4, 'van', 2000);
 
 -- --------------------------------------------------------
 
@@ -186,20 +167,6 @@ CREATE TABLE `payments` (
   `remarks` text NOT NULL,
   `date_created` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `payments`
---
-
-INSERT INTO `payments` (`id`, `ef_id`, `amount`, `remarks`, `date_created`) VALUES
-(9, 2, 200, 'new pay adones', '2022-06-28 18:48:57'),
-(10, 1, 400, 'tution fee', '2022-06-30 20:16:41'),
-(11, 3, 1000, 'dfghbht', '2022-06-30 20:47:07'),
-(12, 3, 100, 'new pay', '2022-07-01 18:10:45'),
-(13, 5, 1000, 'new pay', '2022-07-03 20:56:17'),
-(14, 8, 6000, 'whole pay', '2022-07-03 21:23:38'),
-(15, 6, 200, 'now pay', '2022-07-04 19:14:14'),
-(16, 5, 1000, 'le', '2022-07-05 21:39:43');
 
 -- --------------------------------------------------------
 
@@ -271,17 +238,6 @@ CREATE TABLE `student_ef_list` (
   `date_created` datetime NOT NULL DEFAULT current_timestamp(),
   `month` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `student_ef_list`
---
-
-INSERT INTO `student_ef_list` (`id`, `student_id`, `ef_no`, `course_id`, `total_fee`, `date_created`, `month`) VALUES
-(2, 1, '2020-65427823', 1, 4500, '2020-10-31 13:12:13', 'jan'),
-(5, 2, '2020-667586', 2, 6000, '2022-07-03 20:53:25', 'jan'),
-(6, 2, '2020-66756', 1, 4500, '2022-07-03 21:02:06', 'August'),
-(8, 1, '2020-87427824', 2, 6000, '2022-07-03 21:07:39', 'November'),
-(10, 1, '2020-6867356', 3, 4000, '2022-07-03 21:35:01', 'September');
 
 -- --------------------------------------------------------
 
@@ -545,7 +501,7 @@ ALTER TABLE `classes`
 -- AUTO_INCREMENT for table `fees`
 --
 ALTER TABLE `fees`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `miscellaneous`
@@ -557,7 +513,7 @@ ALTER TABLE `miscellaneous`
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `routes`
@@ -575,7 +531,7 @@ ALTER TABLE `students`
 -- AUTO_INCREMENT for table `student_ef_list`
 --
 ALTER TABLE `student_ef_list`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `subjects`
