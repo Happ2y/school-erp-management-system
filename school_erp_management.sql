@@ -99,6 +99,14 @@ CREATE TABLE `fees` (
   `amount` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `fees`
+--
+
+INSERT INTO `fees` (`id`, `course_id`, `description`, `amount`) VALUES
+(43, 1, 'tution', 2000),
+(44, 1, 'library', 1000);
+
 -- --------------------------------------------------------
 
 --
