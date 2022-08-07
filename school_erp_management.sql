@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 26, 2022 at 09:50 AM
--- Server version: 10.4.21-MariaDB
--- PHP Version: 7.3.31
+-- Generation Time: Aug 07, 2022 at 09:37 AM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -44,7 +44,8 @@ INSERT INTO `announcements` (`announcement_id`, `title`, `descr`, `resource`, `c
 (1, 'webinar on internet of things', 'lorem ipsum dolor sit amet, consectetur adipisicing elit. eligendi non quis exercitationem culpa nesciunt nihil aut nostrum explicabo reprehenderit optio amet ab temporibus asperiores quasi cupiditate. voluptatum ducimus voluptates voluptas?', 'https://docs.emmet.io/abbreviations/lorem-ipsum/', '2022-07-07', 1),
 (2, 'talk by director', 'lorem ipsum dolor sit amet, consectetur adipisicing elit. eligendi non quis exercitationem culpa nesciunt nihil aut nostrum explicabo reprehenderit optio amet ab temporibus asperiores quasi cupiditate. voluptatum ducimus voluptates voluptas?', 'https://docs.emmet.io/abbreviations/lorem-ipsum/', '2022-07-07', 1),
 (3, 'yoga day parade at 5 pm', 'lorem ipsum dolor sit amet, consectetur adipisicing elit. eligendi non quis exercitationem culpa nesciunt nihil aut nostrum explicabo reprehenderit optio amet ab temporibus asperiores quasi cupiditate. voluptatum ducimus voluptates voluptas?', 'https://docs.emmet.io/abbreviations/lorem-ipsum/', '2022-07-07', 1),
-(4, 'talk by dr. ramanujan', 'lorem ipsum dolor sit amet consectetur, adipisicing elit. hic, ratione voluptatibus! repellendus aliquam modi incidunt esse placeat deserunt dolorum quae!', 'https://www.ramanujan.com', '2022-07-08', 1);
+(4, 'talk by dr. ramanujan', 'lorem ipsum dolor sit amet consectetur, adipisicing elit. hic, ratione voluptatibus! repellendus aliquam modi incidunt esse placeat deserunt dolorum quae!', 'https://www.ramanujan.com', '2022-07-08', 1),
+(5, 'talk by mr. nambi narayan', 'lorem ipsum dolor sit amet consectetur, adipisicing elit. hic, ratione voluptatibus! repellendus aliquam modi incidunt esse placeat deserunt dolorum quae!', 'https://www.nambinaraya.com', '2022-07-08', 1);
 
 -- --------------------------------------------------------
 
@@ -66,9 +67,8 @@ CREATE TABLE `attendance` (
 --
 
 INSERT INTO `attendance` (`student_id`, `class_id`, `subject_id`, `present`, `absent`, `total`) VALUES
-(1, 1, 1, 3, 2, 5),
-(2, 1, 1, 2, 3, 5),
-(3, 1, 1, 3, 2, 5);
+(1, 1, 1, 2, 1, 3),
+(3, 1, 1, 1, 2, 3);
 
 -- --------------------------------------------------------
 
@@ -85,6 +85,15 @@ CREATE TABLE `classes` (
   `date_created` datetime NOT NULL DEFAULT current_timestamp(),
   `active` int(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='subjects in each class';
+
+--
+-- Dumping data for table `classes`
+--
+
+INSERT INTO `classes` (`class_id`, `standard`, `subject_ids`, `description`, `total_amount`, `date_created`, `active`) VALUES
+(1, 'one', '[\"1\",\"2\",\"3\",\"4\"]', 'lorem ipsum dolor sit amet consectetur, adipisicing elit. hic, ratione voluptatibus! repellendus aliquam modi incidunt esse placeat deserunt dolorum quae!', 0, '2022-07-07 22:22:16', 1),
+(2, 'two', '[\"5\",\"6\",\"7\",\"8\"]', 'lorem ipsum dolor si', 0, '2022-07-07 22:22:31', 1),
+(3, 'three', '[\"2\",\"4\",\"6\"]', 'lorem ipsum is simply dummy text of the printing and typesetting industry. lorem ipsum has been the industry standard dummy text ever since the 1500 when an unknown printer took a galley of type and scrambled it to make a type specimen book. it has surviv', 0, '2022-08-07 12:27:37', 1);
 
 -- --------------------------------------------------------
 
@@ -104,8 +113,11 @@ CREATE TABLE `fees` (
 --
 
 INSERT INTO `fees` (`id`, `course_id`, `description`, `amount`) VALUES
-(43, 1, 'tution', 2000),
-(44, 1, 'library', 1000);
+(1, 1, 'Tuition', 3000),
+(3, 1, 'sample', 1500),
+(36, 4, 'tution', 2000),
+(37, 3, 'tution', 4000),
+(40, 4, 'van', 2000);
 
 -- --------------------------------------------------------
 
@@ -128,9 +140,8 @@ CREATE TABLE `grades` (
 --
 
 INSERT INTO `grades` (`student_id`, `class_id`, `subject_id`, `mid_term_1`, `mid_term_2`, `end_term`, `other`) VALUES
-(1, 1, 1, 14, 15, 0, 0),
-(2, 1, 1, 16, 20, 0, 0),
-(3, 1, 1, 20, 24, 0, 0);
+(1, 1, 1, 21, 0, 0, 0),
+(3, 1, 1, 20, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -175,6 +186,20 @@ CREATE TABLE `payments` (
   `remarks` text NOT NULL,
   `date_created` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `payments`
+--
+
+INSERT INTO `payments` (`id`, `ef_id`, `amount`, `remarks`, `date_created`) VALUES
+(9, 2, 200, 'new pay adones', '2022-06-28 18:48:57'),
+(10, 1, 400, 'tution fee', '2022-06-30 20:16:41'),
+(11, 3, 1000, 'dfghbht', '2022-06-30 20:47:07'),
+(12, 3, 100, 'new pay', '2022-07-01 18:10:45'),
+(13, 5, 1000, 'new pay', '2022-07-03 20:56:17'),
+(14, 8, 6000, 'whole pay', '2022-07-03 21:23:38'),
+(15, 6, 200, 'now pay', '2022-07-04 19:14:14'),
+(16, 5, 1000, 'le', '2022-07-05 21:39:43');
 
 -- --------------------------------------------------------
 
@@ -225,11 +250,10 @@ CREATE TABLE `students` (
 
 INSERT INTO `students` (`student_id`, `name`, `email`, `password`, `class_id`, `phone`, `gender`, `dob`, `created_at`, `address`, `active`) VALUES
 (1, 'amaya chaudhary', 'amaya.org@gmail.com', '570a8eee40de7053bc03b927095e4982e17683fe', 1, '8002046451', 'female', '2022-07-07', '2022-07-07', 'noida', 1),
-(2, 'priti chaudhary', 'priti.org@gmail.com', '9333b742e133f2bdf85e0e2726a7d82aaece80f8', 1, '8002046457', 'female', '2022-07-07', '2022-07-07', 'west bengal', 1),
 (3, 'shudhanshu chaudhary', 'shudhanshu.org@gmail.com', 'fc4fb9b307256bf883a888ec830d68b389f751e1', 1, '8002046457', 'male', '2022-07-07', '2022-07-07', 'bihar', 1),
 (4, 'happy chaudhary', 'happy.org@gmail.com', '3978d009748ef54ad6ef7bf851bd55491b1fe6bb', 2, '8002046457', 'male', '2022-07-07', '2022-07-07', 'bihar', 1),
 (5, 'chandan maurya', 'chandan.org@gmail.com', '5b09eece4a5b11d5d0125c0f7eca424d593874ed', 2, '8002046457', 'male', '2022-07-07', '2022-07-07', 'mumbai', 1),
-(6, 'rahul chaudhary', 'rahul.org@gmail.com', '8b2357213c6def665b79c46ac43e562ce5e10eef', 2, '8002046457', 'male', '2022-07-07', '2022-07-07', 'west bengal', 1);
+(6, 'rahul chaudhary', 'rahul.org@gmail.com', '8b2357213c6def665b79c46ac43e562ce5e10eef', 2, '8002046457', 'other', '2022-07-07', '2022-07-07', 'west bengal', 1);
 
 -- --------------------------------------------------------
 
@@ -246,6 +270,17 @@ CREATE TABLE `student_ef_list` (
   `date_created` datetime NOT NULL DEFAULT current_timestamp(),
   `month` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `student_ef_list`
+--
+
+INSERT INTO `student_ef_list` (`id`, `student_id`, `ef_no`, `course_id`, `total_fee`, `date_created`, `month`) VALUES
+(2, 1, '2020-65427823', 1, 4500, '2020-10-31 13:12:13', 'jan'),
+(5, 2, '2020-667586', 2, 6000, '2022-07-03 20:53:25', 'jan'),
+(6, 2, '2020-66756', 1, 4500, '2022-07-03 21:02:06', 'August'),
+(8, 1, '2020-87427824', 2, 6000, '2022-07-03 21:07:39', 'November'),
+(10, 1, '2020-6867356', 3, 4000, '2022-07-03 21:35:01', 'September');
 
 -- --------------------------------------------------------
 
@@ -274,7 +309,7 @@ INSERT INTO `subjects` (`subject_id`, `title`, `descr`, `code`, `credit`, `teach
 (3, 'cryptography and network security', 'lorem ipsum dolor sit amet, consectetur adipisicing elit. eligendi non quis exercitationem culpa nesciunt nihil.', 'CNS1', 4, 3, '2022-07-07', 1),
 (4, 'image processing', 'lorem ipsum dolor sit amet, consectetur adipisicing elit. eligendi non quis exercitationem culpa nesciunt nihil.', 'IP1', 4, 4, '2022-07-07', 1),
 (5, 'advanced machine learning', 'lorem ipsum dolor sit amet, consectetur adipisicing elit. eligendi non quis exercitationem culpa nesciunt nihil.', 'ML2', 4, 1, '2022-07-07', 1),
-(6, 'advanced cryptography and network security', 'lorem ipsum dolor sit amet, consectetur adipisicing elit. eligendi non quis exercitationem culpa nesciunt nihil.', 'CNS2', 4, 3, '2022-07-07', 1),
+(6, 'advanced cryptography and network security', 'lorem ipsum dolor sit amet, consectetur adipisicing elit. eligendi non quis exercitationem culpa nesciunt nihil.', 'CNS2', 2, 3, '2022-07-07', 1),
 (7, 'advanced cloud computng', 'lorem ipsum dolor sit amet, consectetur adipisicing elit. eligendi non quis exercitationem culpa nesciunt nihil.', 'CC2', 1, 2, '2022-07-07', 1),
 (8, 'advanced image processing', 'lorem ipsum dolor sit amet, consectetur adipisicing elit. eligendi non quis exercitationem culpa nesciunt nihil.', 'IP2', 4, 4, '2022-07-07', 1),
 (9, 'cyber security', 'lorem ipsum dolor sit amet consectetur, adipisicing elit. hic, ratione voluptatibus! repellendus aliquam modi incidunt esse placeat deserunt dolorum quae!', 'CS3', 4, 5, '2022-07-08', 1),
@@ -328,7 +363,7 @@ INSERT INTO `teachers` (`teacher_id`, `name`, `email`, `password`, `designation`
 (1, 'pratyay kuila', 'pratyay.org@gmail.com', '97026e649d3a629d10dee8cbb592a492d0de9862', 'hod', '8002046411', 'male', '2022-07-07', 'west bengal', 1),
 (2, 'anand mishra', 'anand.org@gmail.com', 'b973f774bfeab53233b4f347be114e9ca7b2d00f', 'professor', '8002046457', 'male', '2022-07-07', 'uttar pradesh', 1),
 (3, 'sangram ray', 'sangram.org@gmail.com', '162d49ca8e94c2d87fe6d3c74fe4556f332b3cf1', 'professor', '8002046457', 'male', '2022-07-07', 'west bengal', 1),
-(4, 'gopa bhaumik', 'gopa.org@gmail.com', 'edf26b399dbd957091aadca3868b1031793a9cd4', 'incoming hod', '8002046457', 'female', '2022-07-07', 'delhi', 0),
+(4, 'gopa bhaumik', 'gopa.org@gmail.com', 'edf26b399dbd957091aadca3868b1031793a9cd4', 'incoming hod', '8002046457', 'female', '2022-07-07', 'delhi', 1),
 (5, 'ranjan basak', 'ranjan.org@gmail.com', '6303bec5a6070e70827a95d15977c407ceb400a8', 'advisor', '8002046457', 'male', '2022-07-08', 'west bengal', 1);
 
 -- --------------------------------------------------------
@@ -350,7 +385,8 @@ CREATE TABLE `timetables` (
 
 INSERT INTO `timetables` (`timetable_id`, `class_id`, `file`, `active`) VALUES
 (1, 1, 'standard-one.pdf', 1),
-(2, 2, 'standard-two.pdf', 1);
+(2, 2, 'standard-two.pdf', 1),
+(3, 3, 'Transcript.PDF', 1);
 
 -- --------------------------------------------------------
 
@@ -396,8 +432,8 @@ CREATE TABLE `vehicles_schedule` (
 --
 
 INSERT INTO `vehicles_schedule` (`schedule_id`, `vehicle_id`, `day`, `arrival`, `departure`, `route_id`, `driver_id`, `active`) VALUES
-(1, 1, 'saturday', '10:00:00', '09:30:00', 1, 5, 1),
-(2, 1, 'saturday', '15:30:00', '15:00:00', 1, 5, 1),
+(1, 1, 'sunday', '10:00:00', '09:30:00', 1, 5, 1),
+(2, 1, 'sunday', '15:30:00', '15:00:00', 1, 5, 1),
 (3, 2, 'monday', '08:40:00', '08:30:00', 2, 3, 1),
 (4, 2, 'monday', '08:43:00', '07:41:00', 2, 3, 1);
 
@@ -497,19 +533,19 @@ ALTER TABLE `vehicles_schedule`
 -- AUTO_INCREMENT for table `announcements`
 --
 ALTER TABLE `announcements`
-  MODIFY `announcement_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `announcement_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `classes`
 --
 ALTER TABLE `classes`
-  MODIFY `class_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `class_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `fees`
 --
 ALTER TABLE `fees`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `miscellaneous`
@@ -521,7 +557,7 @@ ALTER TABLE `miscellaneous`
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `routes`
@@ -539,7 +575,7 @@ ALTER TABLE `students`
 -- AUTO_INCREMENT for table `student_ef_list`
 --
 ALTER TABLE `student_ef_list`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `subjects`
@@ -563,7 +599,7 @@ ALTER TABLE `teachers`
 -- AUTO_INCREMENT for table `timetables`
 --
 ALTER TABLE `timetables`
-  MODIFY `timetable_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `timetable_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `vehicles`
