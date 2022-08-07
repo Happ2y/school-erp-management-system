@@ -130,6 +130,13 @@
             <br>
 
             <div class="col-sm-10">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="./admin.php">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Admin</li>
+                    </ol>
+                </nav>
+
                 <div class="well">
                     <h4>Dashboard</h4>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem, laudantium. Hic suscipit modi, molestiae a veniam tenetur officiis nostrum. Doloribus praesentium dolorum culpa corporis qui quas magnam corrupti enim fugiat.</p>
