@@ -11,12 +11,12 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <style>
         .row.content {
-            height: 80vh;
+            height: 100vh;
         }
 
         .sidenav {
             background-color: #f1f1f1;
-            height: 100%;
+            height: 100vh;
         }
 
         @media screen and (max-width: 767px) {

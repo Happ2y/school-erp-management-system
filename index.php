@@ -48,19 +48,19 @@
             <div class="announcements col-12 col-sm">
                 <div class="text-center">
                     <p>ANNOUNCEMENTS</p>
-                </div>     
+                </div>
                 <ul id="notice" class="text-center p-3">
-                <marquee direction="up" behavior="scroll-alternate" loop="">
-                    <?php
-                    $announcements_query = "SELECT * FROM announcements WHERE active = 1 ORDER BY announcement_id ASC";
-                    $response = mysqli_query($conn, $announcements_query);
-                    $announcements_details = mysqli_fetch_all($response, MYSQLI_ASSOC);
+                    <marquee direction="up" behavior="scroll-alternate" loop="">
+                        <?php
+                        $announcements_query = "SELECT * FROM announcements WHERE active = 1 ORDER BY announcement_id ASC";
+                        $response = mysqli_query($conn, $announcements_query);
+                        $announcements_details = mysqli_fetch_all($response, MYSQLI_ASSOC);
 
-                    for ($i = 0; $i < sizeof($announcements_details); $i++) {
-                        $title = ucwords($announcements_details[$i]["title"]);
-                        $descr = $announcements_details[$i]["descr"];
-                        $resource = $announcements_details[$i]["resource"];
-                        echo "
+                        for ($i = 0; $i < sizeof($announcements_details); $i++) {
+                            $title = ucwords($announcements_details[$i]["title"]);
+                            $descr = $announcements_details[$i]["descr"];
+                            $resource = $announcements_details[$i]["resource"];
+                            echo "
                             <li class='news-item'>
                                 <p class='font-weight-bold'>$title</p>
                                 <p>$descr</p>
@@ -68,10 +68,10 @@
                             </li>
                             <hr>
                         ";
-                    }
-                    ?>
+                        }
+                        ?>
                     </marquee>
-                </ul>   
+                </ul>
             </div>
         </div>
         <br>

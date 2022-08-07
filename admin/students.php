@@ -179,8 +179,8 @@
             if ($query == "update") {
                 $student_id = $_GET["student_id"];
                 $student_query = "SELECT 
-                    students.name, students.email, students.phone, students.gender, students.dob, students.address, classes.class_id, classes.standard
-                    FROM students JOIN classes ON students.class_id = classes.class_id WHERE students.student_id = $student_id AND classes.active = 1   AND students.active = 1
+                    students.name, students.email, students.phone, students.gender, students.dob, students.address, students.active, classes.class_id, classes.standard
+                    FROM students JOIN classes ON students.class_id = classes.class_id WHERE students.student_id = $student_id
                     LIMIT 1
                 ";
                 $response = mysqli_query($conn, $student_query);
@@ -272,13 +272,13 @@
                     ";
                 }
 
-                if($student_details['active'] == '1'){
+                if($student_details['active'] == 1){
                     echo "
                         <div class='form-group'>
                             <label>Status:</label>
                             <select class='form-control' name='active' required>
-                                <option selected value='1'>Active</option>
-                                <option value='0'>Inactive</option>
+                                <option selected value=1>Active</option>
+                                <option value=0>Inactive</option>
                             </select>
                         </div>
                     ";
@@ -287,8 +287,8 @@
                         <div class='form-group'>
                             <label>Status:</label>
                             <select class='form-control' name='active' required>
-                                <option value='1'>Active</option>
-                                <option selected value='0'>Inactive</option>
+                                <option value=1>Active</option>
+                                <option selected value=0>Inactive</option>
                             </select>
                         </div>
                     ";
@@ -339,6 +339,12 @@
             if($query == "delete"){
                 $student_id = $_GET["student_id"];
                 $student_query = "DELETE FROM students WHERE student_id = $student_id AND active = 1";
+                mysqli_query($conn, $student_query) or die(mysqli_errno($conn));
+
+                $student_query = "DELETE FROM attendance WHERE student_id = $student_id";
+                mysqli_query($conn, $student_query) or die(mysqli_errno($conn));
+
+                $student_query = "DELETE FROM grade WHERE student_id = $student_id";
                 mysqli_query($conn, $student_query) or die(mysqli_errno($conn));
                 header('Location: ./students.php?query=manage');
             }

@@ -143,6 +143,7 @@
                                                 <th>Phone</th>
                                                 <th>Address</th>
                                                 <th>D.O.B</th>
+                                                <th>Classes</th>
                                                 <th>% Attendance</th>
                                                 <th>Status</th>
                                             </tr>
@@ -159,32 +160,35 @@
                         $response = mysqli_query($conn, $student_attendance) or die(mysqli_error($conn));
                         $student_attendance_details = mysqli_fetch_array($response, MYSQLI_ASSOC);
 
-                        $attendance_percentage = ($student_attendance_details["present"] / $student_attendance_details["total"]) * 100;
+                        $attendance_percentage = 0;
+                        if(isset($student_attendance_details["present"])){
+                            $attendance_percentage = ($student_attendance_details["present"] / $student_attendance_details["total"]) * 100;
+                        }
 
                         echo "
-                                <tr>
-                                    <td>{$student_details['name']}</td>
-                                    <td>{$student_details['email']}</td>
-                                    <td>{$student_details['phone']}</td>
-                                    <td>{$student_details['address']}</td>
-                                    <td>{$student_details['dob']}</td>
-                                    <td>$attendance_percentage %</td>
-                                    <td>
-                                        <label class='radio-inline pr-2'><input type='radio' name='attendance[{$student_details['student_id']}]' value='1' required>Present</label>
-                                        <label class='radio-inline pr-2'><input type='radio' name='attendance[{$student_details['student_id']}]' value='0' required>Absent</label>
-                                    </td>
-                                </tr>
-                            ";
-                    }
-
-                    echo "          </tbody>
-                                    </table>
-                                </div>
-                                <div class='text-center mt-5'>
-                                    <button type='submit' name='submit_attendance' class='btn btn-success w-50'>Submit Attendance</button>
-                                </div>
-                            </form>
+                            <tr>
+                                <td>{$student_details['name']}</td>
+                                <td>{$student_details['email']}</td>
+                                <td>{$student_details['phone']}</td>
+                                <td>{$student_details['address']}</td>
+                                <td>{$student_details['dob']}</td>
+                                <td>{$student_attendance_details["total"]}</td>
+                                <td>$attendance_percentage %</td>
+                                <td>
+                                    <label class='radio-inline pr-2'><input type='radio' name='attendance[{$student_details['student_id']}]' value='1' required>Present</label>
+                                    <label class='radio-inline pr-2'><input type='radio' name='attendance[{$student_details['student_id']}]' value='0' required>Absent</label>
+                                </td>
+                            </tr>
                         ";
+                    }
+                    echo "          </tbody>
+                                </table>
+                            </div>
+                            <div class='text-center mt-5'>
+                                <button type='submit' name='submit_attendance' class='btn btn-success w-50'>Submit Attendance</button>
+                            </div>
+                        </form>
+                    ";
                 } else {
                     echo "
                             <div class='text-center mt-4'>
